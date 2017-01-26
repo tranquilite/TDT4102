@@ -1,0 +1,80 @@
+\documentclass{article}
+
+\usepackage[a4paper]{geometry}
+\usepackage{listings, xcolor, fancyhdr}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[norsk]{babel}
+
+\input{preamble}
+\pagestyle{fancy}
+\begin{document}
+\section*{Øving 0.5}
+
+Jeg har egentlig ingen anelse om hvordan øvingsinnleveringer er best formaterte, så her kommer ..dette. Tar \emph{veldig gjerne} kritikk på formatering.
+
+\section{Kodeforståelse / Oversett til Python}
+\subsection{isFibonacciNumber}
+\lstinputlisting[language=Python,]{kode/1a.py}
+
+\newpage
+\section{Oversett fra Python til C++}
+La inn main() for de funksjonene hvor det virket hensiktsmessig å unit-teste litt grovt.
+
+\subsection{Fibonaccirekker}
+\lstinputlisting{kode/2a-Fibonaccirekker.cpp}
+
+Enda litt morsom oppførsel, men oppførsel som man egentlig forventer.
+For et gitt input {\bfseries n}, så lister den opp til n-1, siden range(1, n) forstår sitt input som et halv-åpent intervall fra (1,n].
+
+(Siden halvåpne internvall er definert i stilen av $\forall e \in (1,n], e \geq 1 \land e < n $. Så range(1,n) gir [1, 2, 3,... n-1]. Nullindeksering. Hurra!)
+
+\newpage
+\subsection{Trekanttall}
+\lstinputlisting{kode/2b-Trekanttall.cpp}
+
+Pythonkoden supplert har ikke et return-uttrykk for triangleNumbersBelow(), så jeg gikk for void().
+
+\newpage
+\subsection{Sum av kvadrerte tall}
+\lstinputlisting{kode/2c-SumKvadrerteTall.cpp}
+Jeg mener at pythonkoden har en litt besynderlig oppførsel, i at den printer ut kvadratet av \emph{neste} {\bfseries i}, for hver iterasjon.
+Slik at, for et input {\bfseries 6}, så gir den totalSum som 55, men produserer en liste som går mot 91.
+Se f.eks.\\
+\begin{verbatim}
+dhcp-037213:kode mathiasholm$ py test.py 
+1
+4
+9
+16
+25
+36
+55
+\end{verbatim}
+
+\newpage
+\subsection{Størst av to tall}
+\lstinputlisting{kode/2d-StorsteTall.cpp}
+Hastig unit-testing på i main()
+\newpage
+\subsection{Primtall 1 \& 2}
+\stepcounter{subsection} % Denne har for båe 2e og 2f
+\lstinputlisting{kode/2e-Primtall.cpp}
+Størrelsen på unit-testene ble litt keitete.\\
+Klistret 2e og 2f inn på samme side, siden 2f har et kall til isPrime()
+\newpage
+\subsection{Største Fellesnevner}
+\lstinputlisting{kode/2g-StorsteFellesNevner.cpp}
+
+Introduserte linje 5 for å gi støtte for negativt input.
+Hvori linje 10 helst aldri skal nås i normal programflyt, men som er \emph{nødvendigish} for å unngå en
+kompileradvarsel.
+
+\newpage
+\subsection{Telling med lister}
+\lstinputlisting{kode/2h-TellingMedLister.cpp}
+
+Så, siden C++ er statisk, i motsetning til pythons herlige dynamiske verden, så kan ikke oppførselen med en liste av arbitrær lengde overføres like enkelt fra pythonkoden til C++.
+Det er veldig tidlig i semesteret, og vi har ikke vært borti pekere enda, og vektorer virket litt overkill å begynne med, så jeg gambler på få aksept for at jeg introduserte et implisitt ekstraparameter for listen, så svaret mitt skulle reprodusere oppførselen til pythonkoden så nært som mulig, uten å knote for mye.
+
+\end{document}

@@ -1,0 +1,15 @@
+*.swp
+
+*.mp4
+
+*.aux
+*.log
+*.lof
+*.toc
+*.fls
+
+.DS_Store
+a.out
+test.*
+
+*.o
