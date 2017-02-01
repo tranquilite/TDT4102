@@ -6,6 +6,7 @@ using std::endl;
 using std::cin;
 
 #include "cannonball.h"
+#include "utilities.h"
 
 //2 - Implementer funksjoner
 
@@ -14,13 +15,17 @@ double acclX() { return 0.0;  }
 
 double velY(double initVelocity, double time) {
     double vel_Y = initVelocity + (acclY() * time);
-
     return vel_Y;
+}
+
+double velX(double initVelocity, double time) {
+    double vel_X = initVelocity + (acclX() * time);
+    return vel_X;
 }
 
 double posX(double initPosition, double initVelocity,
             double time) { 
-    double posisjon = (initPosition * time) + 
+    double posisjon = (initVelocity * time) + 
                ( ( acclX() * pow(time, 2) ) / 2.0);
 
     return 0;
@@ -28,8 +33,9 @@ double posX(double initPosition, double initVelocity,
 
 double posY(double initPosition, double initVelocity,
             double time) { 
-    double posisjon = (initVelocity * time) + 
+    double posisjon = initPosition + (initVelocity * time) + 
                 ( ( pow(time, 2) * acclY() ) / 2.0 );
+    //posisjon = initPosition + initVelocity * time + ((pow(time,2) * acclY()) / 2);
     return posisjon;
 }
 
@@ -84,10 +90,21 @@ double targetPractice(double distanceToTarget,
                         double velocityX, double velocityY) {
     double resultat = getDistanceTraveled(velocityX, velocityY);
     double avvik = pow(distanceToTarget - resultat, 2);
-    if (avvik == 0) {
+    if (avvik == 5) {
         cout << "blink\n";
     } else {
         cout << "utenfor feilmargin\n";
     }
     return avvik;
+}
+
+void playTargetPractice() {
+    double *theta = new double;
+    double *absVelocity = new double;
+    getUserInput(theta, absVelocity);
+    double velX = getVelocityX(*theta, *absVelocity);
+    double velY = getVelocityY(*theta, *absVelocity);
+    
+    targetPractice(randomWithLimits(100, 1000), velX, velY);
+    //cout << "Funk da ni jävlar!";
 }

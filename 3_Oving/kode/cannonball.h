@@ -1,5 +1,6 @@
 double acclY();
 double velY(double initVelocityY, double time);
+double velX(double initVelocityY, double time);
 
 double posX(double initPosition, double initVelocity, 
             double time);
@@ -26,3 +27,5 @@ double getDistanceTraveled(double velocityX, double velocityY);
 
 double targetPractice(double distanceToTarget, double velocityX,
                         double velocityY);
+
+void playTargetPractice();
