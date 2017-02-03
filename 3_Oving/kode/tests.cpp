@@ -13,7 +13,7 @@ for(int i=0; i < 3; i++) {
         << acclY() << "\t"
         << velY(25, test[i]) << "\t"
         << velX(50, test[i]) << "\t"
-        << posX(0, velX(50, test[i]), test[i]) << "\t"
+        << posX(0, 50, test[i]) << "\t"
         << posY(0, 25, test[i]) << "\t"
         << endl;
     }
