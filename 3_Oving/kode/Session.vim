@@ -17,14 +17,14 @@ set window=0
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/Workspace/wip/ntnu/objektorientert/3_Oving/kode
+cd ~/Workspace/wip/ntnu/TDT4102/3_Oving/kode
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +0 cannonball.cpp
+badd +1 cannonball.cpp
 badd +3 tests.cpp
-badd +0 cannonball.h
+badd +1 cannonball.h
 badd +10 main.cpp
 args cannonball.cpp
 edit cannonball.cpp
@@ -246,12 +246,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 10 - ((9 * winheight(0) + 7) / 15)
+let s:l = 8 - ((7 * winheight(0) + 7) / 15)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-10
-normal! 055l
+8
+normal! 0
 wincmd w
 argglobal
 edit cannonball.h
@@ -355,7 +355,7 @@ if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 25
-normal! 024l
+normal! 0
 wincmd w
 2wincmd w
 exe 'vert 1resize ' . ((&columns * 110 + 90) / 181)
