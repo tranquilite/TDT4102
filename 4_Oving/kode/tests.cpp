@@ -5,6 +5,7 @@
 using std::cout;
 using std::endl;
 
+//DEL 1 - Call By Value Vs. Pekere (15&)
 void testByCallValue() {
     int v0 = 0;
     int increment = 2;
@@ -33,8 +34,9 @@ void testByCallPointer() {
          << "result: " << result << endl;
 }
 
-/*int main() {
-    testByCallValue2();
 
-    return 0;
-}*/
+//DEL 2 - TABELLER (Arrays) 10%
+void testTableSorting() {
+    int percentages[20];
+}
+
