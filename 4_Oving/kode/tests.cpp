@@ -12,27 +12,29 @@ void testByCallValue() {
     //v0 = 0;
     int result = incrementByNumTimesValue(v0, increment, iterations);
     //v0 = 0;
-    cout << "v0: " << v0 << endl
+    cout << "testByCallValue" << endl   
+         << "v0: " << v0 << endl
          << "increment: " << increment << endl
          << "iterations: " << iterations << endl
-         << "result: " << result << endl;
+         << "result: " << result << endl << endl;
 }
 
-void testByCallValue2() {
-    int *v0 = 0;
+void testByCallPointer() {
+    int v0 = 0;
     int increment = 2;
     int iterations = 20;
     //v0 = 0;
-    int result = incrementByNumTimesValue2(v0, increment, iterations);
+    int result = incrementByNumTimesValue2(&v0, increment, iterations);
     //v0 = 40
-    cout << "v0: " << v0 << endl
+    cout << "testByCallPointer" << endl   
+         << "v0: " << v0 << endl
          << "increment: " << increment << endl
          << "iterations: " << iterations << endl
          << "result: " << result << endl;
 }
 
-int main() {
+/*int main() {
     testByCallValue2();
 
     return 0;
-}
+}*/
