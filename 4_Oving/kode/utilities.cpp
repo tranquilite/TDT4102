@@ -2,10 +2,14 @@
 #include<ctime>
 #include<cstdlib>
 #include<iostream>
+#include<math.h>
+#include<cctype>
 
 using std::ifstream;
 using std::cout;
 using std::endl;
+using std::cin;
+using std::toupper;
 
 int incrementByNumTimesValue(int startValue, int increment, int numTimes) {
     for(int i=0; i < numTimes; i++) {
@@ -33,12 +37,20 @@ void swapNumbers(int *etTall, int *toTall) {
 }
 
 //Del 2
+/*template<typename P_TYPE>
+void printArray(P_TYPE arrayToPrint[], int arrayLen) {
+    for(int i=0; i < arrayLen; ++i) { //Preincrement fordi zero-index
+        cout << arrayToPrint[i] << "  ";
+    }
+    cout << endl;
+}*/
 void printArray(int arrayToPrint[], int arrayLen) {
     for(int i=0; i < arrayLen; ++i) { //Preincrement fordi zero-index
         cout << arrayToPrint[i] << "  ";
     }
     cout << endl;
 }
+
 
 int randomWithLimits(int lower, int upper) {
     int rekkevidde_diff = (upper - lower);
@@ -50,7 +62,7 @@ int randomWithLimits(int lower, int upper, int mode) {
     unsigned int seed = 0;
     switch(mode){
         case 0:
-            seed = time(0);
+            seed = 0x9b3779b1 * 4;
             break;
         case 1: //RAGE WOLF MODE
             char * streng; //Init peker til seed-streng
@@ -66,7 +78,6 @@ int randomWithLimits(int lower, int upper, int mode) {
                     seed += int(streng[i]);
                 }
             } else {
-                cout << "smeg" << endl;
                 srand(0); //Plystrer uskyldig..
             }
             break;
@@ -80,4 +91,70 @@ void randomizeArray(int arrayToPopulate[], int arrayLen) {
     for(int i = 0; i < arrayLen; ++i) {
         arrayToPopulate[i] = randomWithLimits(0, 100, 1);
     }
+}
+
+void randomizeArrayWithScope(int arrayToPopulate[], int arrayLen,
+                            int upper, int lower) {
+    for(int i = 0; i < arrayLen; ++i) {
+        arrayToPopulate[i] = randomWithLimits(0, 100, 1);
+    }
+}
+//Del 3
+
+void sortArray(int arrayToSort[], int arrayLen) {
+    //Jævla fuckings bubblesort
+    //men loop da for faen.
+    bool unSorted = true, runOnce = false; //init
+    while(unSorted) {
+        for(int i=0; i < arrayLen-1; ++i) {
+            if(arrayToSort[i] > (arrayToSort[((i+1) % arrayLen)])) {
+                runOnce = true;
+                swapNumbers(&arrayToSort[i], &arrayToSort[((i+1) % arrayLen)]);
+            }
+            printArray(arrayToSort, 20);
+            if(runOnce == false) { unSorted = false; }
+            if(i == arrayLen+1) { i = 0; }
+            runOnce = false;
+        }
+    }
+}
+
+int medianValue(int array[], int arrLen) {
+    double em = arrLen; //cast to float
+    if(fmod(em, 2) == 0) { // ai ai ai begynner å gå tom for tid
+        return array[(int(em/2))]+array[(int(em)/2)-1];
+    } else {
+        return array[(int(em)/2)];
+    }
+    return 0;
+}
+
+
+//Del 4 - Dette blir bare mer og mer uoversiktlig
+void printArray(char arrayToPrint[], int arrayLen) {
+    for(int i=0; i < arrayLen; ++i) {
+        cout << arrayToPrint[i] << "  ";
+    }
+    cout << endl;
+}
+
+void randomizeCString(char arrayToPopulate[], int arrayLen, int lower, int upper) {   
+    for(int i = 0; i < (arrayLen-1); ++i) {
+        arrayToPopulate[i] = randomWithLimits(lower, upper, 1);
+    }
+    arrayToPopulate[arrayLen] = '\0';
+}
+
+void readInputToCString(char array[], int arrLen, int lower, int upper) {
+    for(int i=0; i < arrLen; ++i) {array[i] = '0';}
+    for(int i=0; i < arrLen; i++) {
+        char inn;
+        cin >> inn;
+    
+        if(toupper(inn) > lower and toupper(inn) < upper) { array[i] = inn; } else { i--;} 
+ 
+
+        cout << i << "  " << array << endl;
+    }
+    array[arrLen] = '\0';
 }

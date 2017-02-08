@@ -1,16 +1,17 @@
 #include<iostream>
 
 #include"utilities.h"
-#include "tests.h"
+#include"tests.h"
 
 using std::cout;
 using std::endl;
 
 
 int main() {
-    int test[10];
-    randomizeArray(test, 10);
-    printArray(test, 10);
+    //testTableSorting();
+    //testCStrings();
+    char *CArray = new char[10];
+    readInputToCString(CArray, 10, 56, 70);
     return 0;
 }
 

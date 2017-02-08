@@ -38,5 +38,18 @@ void testByCallPointer() {
 //DEL 2 - TABELLER (Arrays) 10%
 void testTableSorting() {
     int percentages[20];
+    randomizeArray(percentages, 20);
+    printArray(percentages, 20);
+    cout << medianValue(percentages, 20) << endl;
+    sortArray(percentages, 20);
+    printArray(percentages, 20);
+    cout << medianValue(percentages, 20) << endl;
 }
 
+//DEL 4 - Char strenger
+void testCStrings() {
+    enum Karakter {A = 65, B, C, D, E, F};
+    char *Grades = new char[9]; //og så driter vi å debugge litt. Hvorfor lese pensum lizm
+    randomizeCString(Grades, 9, A, F);
+    cout << Grades;
+}
