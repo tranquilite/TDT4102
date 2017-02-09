@@ -2,6 +2,7 @@
 
 #include"utilities.h"
 #include"tests.h"
+#include"mastermind.h"
 
 using std::cout;
 using std::endl;
@@ -10,8 +11,9 @@ using std::endl;
 int main() {
     //testTableSorting();
     //testCStrings();
-    char *CArray = new char[10];
-    readInputToCString(CArray, 10, 56, 70);
+    //char *CArray = new char[10];
+    //readInputToCString(CArray, 10, 56, 70);
+    playMastermind();
     return 0;
 }
 

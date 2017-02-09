@@ -151,10 +151,9 @@ void readInputToCString(char array[], int arrLen, int lower, int upper) {
         char inn;
         cin >> inn;
     
-        if(toupper(inn) > lower and toupper(inn) < upper) { array[i] = inn; } else { i--;} 
- 
-
-        cout << i << "  " << array << endl;
+        if(toupper(inn) >= lower and toupper(inn) <= upper)
+            { array[i] = toupper(inn); } else { i--;} 
     }
-    array[arrLen] = '\0';
+
+    array[arrLen] = '\0'; //bs
 }

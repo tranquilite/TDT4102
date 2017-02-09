@@ -49,7 +49,9 @@ void testTableSorting() {
 //DEL 4 - Char strenger
 void testCStrings() {
     enum Karakter {A = 65, B, C, D, E, F};
+    Karakter lower = A;
+    Karakter upper = F;
     char *Grades = new char[9]; //og så driter vi å debugge litt. Hvorfor lese pensum lizm
-    randomizeCString(Grades, 9, A, F);
+    randomizeCString(Grades, 9, lower, upper);
     cout << Grades;
 }
