@@ -13,7 +13,8 @@ int main() {
     //testCStrings();
     //char *CArray = new char[10];
     //readInputToCString(CArray, 10, 56, 70);
-    playMastermind();
+    testCStrings2();
+    //playMastermind();
     return 0;
 }
 

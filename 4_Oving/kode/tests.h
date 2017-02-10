@@ -7,3 +7,4 @@ void testTableSorting();
 
 //Del 4
 void testCStrings();
+void testCStrings2();

@@ -28,8 +28,6 @@ int incrementByNumTimesValue2(int *startValue, int increment, int numTimes) {
 }
 
 void swapNumbers(int *etTall, int *toTall) {
-    //Pointypointy fordi hvorfor legge mer på stacken når vi allerede har to
-    //helt fine rett under som vi kan omrokkere på?
     //Skal bytte på to tall, hva skulle jeg gjort?
     int a = *etTall;
     *etTall = *toTall;
@@ -73,7 +71,6 @@ int randomWithLimits(int lower, int upper, int mode) {
                 streng = new char[str]; //Init arr på heap
                 fil.read(streng, str); //Les str-symbol fra ios til streng-peker
                 fil.close();
-                //I guess dette funker halvveis fordi jeg leser binært?
                 for(int i = 0; i < str; ++i) {
                     seed += int(streng[i]);
                 }
@@ -99,6 +96,7 @@ void randomizeArrayWithScope(int arrayToPopulate[], int arrayLen,
         arrayToPopulate[i] = randomWithLimits(0, 100, 1);
     }
 }
+
 //Del 3
 
 void sortArray(int arrayToSort[], int arrayLen) {

@@ -51,7 +51,16 @@ void testCStrings() {
     enum Karakter {A = 65, B, C, D, E, F};
     Karakter lower = A;
     Karakter upper = F;
-    char *Grades = new char[9]; //og så driter vi å debugge litt. Hvorfor lese pensum lizm
+    char *Grades = new char[9]; //og så driter vi å debugge litt
     randomizeCString(Grades, 9, lower, upper);
+    cout << Grades;
+}
+
+void testCStrings2() {
+    enum Karakter {A = 65, B, C, D, E, F}; //idiot.
+    Karakter lower = A, upper = E;
+    char *Grades = new char[41];
+    //randomizeCString(Grades, 41, lower, upper);
+    readInputToCString(Grades, 41, lower, upper);
     cout << Grades;
 }
