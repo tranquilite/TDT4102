@@ -1,5 +1,4 @@
 #include<iostream>
-#include<algorithm>
 
 #include "utilities.h"
 #include "mastermind.h"
@@ -14,7 +13,7 @@ void playMastermind() {
     const int SIZE = 4;
     const int LETTERS = 6;
     enum Karakter {A = 65, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T,
-                    U, V, W, X, Y, Z};
+                    U, V, W, X, Y, Z}; //Meningsløst. Fjern i refactor.
     Karakter lower = A, upper = F;
     int turn = 0;
     char *code = new char[SIZE+1];
@@ -51,6 +50,7 @@ int checkCharactersAndPosition(char code[], char guess[], int arrLen) {
 int checkCharacters(char code[], char guess[], int arrLen) {
     //teller feil
     //ah ,fuckit. Tida går uansett ut
+    //TENK DA. Hallo. Det står jo et hint i oppgaveteksten.
     int counts = 0;
     for(int i=0; i<arrLen; ++i) {
         for(int e=0; e<arrLen; ++e) {
@@ -59,6 +59,5 @@ int checkCharacters(char code[], char guess[], int arrLen) {
             }
         }
     }
-            
     return counts;
 }
