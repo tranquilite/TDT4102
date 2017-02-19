@@ -2,10 +2,10 @@ CC=g++
 CFLAGS=-c -Wall -std=c++11
 LDFLAGS=-lsfml-graphics -lsfml-window -lsfml-system
 
-SOURCES=main.cpp Car.cpp Person.cpp
+SOURCES=main.cpp Car.cpp Person.cpp tests.cpp
 
 OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=oving
+EXECUTABLE=oving.out
 
 all: $(SOURCES) $(EXECUTABLE)
     

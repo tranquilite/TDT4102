@@ -6,6 +6,6 @@ using std::cout;
 
 int main() {
 
-
+    testSFML();
     return 0;
 }
