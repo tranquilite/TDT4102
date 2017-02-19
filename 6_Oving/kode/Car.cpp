@@ -1,5 +1,6 @@
 #include "Car.h"
 
+namespace del1 {
 Car::Car(int seatsTotal) {
     this->freeSeats = seatsTotal;
 }
@@ -13,3 +14,5 @@ void Car::reserveFreeSeat() {
         (this->freeSeats)--;
     }
 }
+
+} //namespace del1 slutt

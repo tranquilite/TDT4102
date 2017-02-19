@@ -2,9 +2,11 @@
 #include<string>
 
 #include"Car.h"
+using namespace del1;
 
 using std::string;
 
+namespace del1 {
 class Person {
     private:
         string name;
@@ -19,5 +21,8 @@ class Person {
         
         const string getProperty(string property);
         void setEmail(string new_email);
+        const bool hasAvailableSeats();
 
 };
+
+} //namespace del1 slutt
