@@ -11,18 +11,24 @@ class Person {
     private:
         string name;
         string email;
-        Car* car;
+        Car *car; //Husk å oppdatere Car-constructor!
 
     public:
         Person(string name) { this->name = name; }
         Person(string name, string email) : Person(name) {
             this->email = email;
         }
+        Person(string name, string email, int seats) : Person(name, email) {
+            this->car = new Car(seats);
+        }
         
-        const string getProperty(string property);
+        string getProperty(string property) const;
         void setEmail(string new_email);
         const bool hasAvailableSeats();
-
+        const bool operator==(const Person&);
+        const bool operator<(const Person&);
+        friend const std::ostream& operator<<(std::ostream&, const Person&);
 };
+
 
 } //namespace del1 slutt

@@ -6,10 +6,10 @@ class Car {
         int freeSeats;
 
     public:
+        Car();
         Car(int seatsTotal);
         const bool hasFreeSeats();
         void reserveFreeSeat();
-
 };
 
 } //namespace del1 slutt
