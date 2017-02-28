@@ -8,7 +8,7 @@
 Target::Target(double size, double position) {
     this->size = size;
     this->position = position;
-    shape = sf::RectangleShape(sf::Vector2f(size, size));
+    shape = sf::RectangleShape(sf::Vector2f(50.0, 20.0));
     shape.setFillColor(sf::Color::Red);
     shape.setPosition(110, 60);
 }
