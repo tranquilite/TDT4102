@@ -1,16 +1,19 @@
-all: main
+CC=g++
+CFLAGS=-c -Wall -std=c++11
+LDFLAGS=-lsfml-graphics -lsfml-window -lsfml-system
 
-filer = 
+SOURCES=main.cpp Car.cpp Person.cpp Meeting.cpp tests.cpp
 
-main: main.cpp $(filer)
-	g++ main.cpp $(filer) -o a.out
+OBJECTS=$(SOURCES:.cpp=.o)
+EXECUTABLE=oving.out
+
+all: $(SOURCES) $(EXECUTABLE)
     
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
 
-invoc: main.cpp $(filer)
-	g++ -v main.cpp $(filer) -o a.out
-    
-test: tests.cpp $(filer)
-	g++ tests.cpp $(filer) -o test.out
+.cpp.o:
+	$(CC) $(CFLAGS) $< -o $@
 
 clean:
-	rm *.out
+	rm *.o
