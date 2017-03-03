@@ -4,12 +4,14 @@ using std::cout;
 
 #include"fib.h"
 #include"matrix.h"
+
+#include"dummy.h"
 #include"tests.h"
 
 
 int main() {
-    //createFibonacci();
-    Matrix T; 
-    Matrix E(10);
+    //matriser();
+    matriser2();
+
     return 0;
 }
