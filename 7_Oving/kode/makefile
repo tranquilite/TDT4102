@@ -1,8 +1,9 @@
 CC=g++
 CFLAGS=-c -Wall -std=c++11
-LDFLAGS=-lsfml-graphics -lsfml-window -lsfml-system
+#LDFLAGS=-lsfml-graphics -lsfml-window -lsfml-system
+LDFLAGS=
 
-SOURCES=main.cpp Car.cpp Person.cpp Meeting.cpp tests.cpp
+SOURCES=main.cpp tests.cpp fib.cpp matrix.cpp
 
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=oving.out
