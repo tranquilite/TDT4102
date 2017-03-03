@@ -10,8 +10,10 @@ using std::cout;
 
 
 int main() {
+    createFibonacci();
     //matriser();
-    matriser2();
+    //matriser2();
+    //dummyTest();
 
     return 0;
 }
