@@ -71,12 +71,12 @@ int Matrix::getHeight() const { return this->rader; }
 int Matrix::getWidth()  const { return this->kolonner; }
 bool Matrix::isValid() const  { return (this->matrise != nullptr); }
 
-Matrix Matrix::operator=(Matrix& rhs) {
+Matrix Matrix::operator=(Matrix& rhs) { // deep copy av høyre side
     //Fuckings magi. Forstår ikke den dritt av dette. Les opp og lær.
     std::swap(matrise, rhs.matrise);
     return *this;
     //nisse.
-}
+}  // rhs blir destruert
 
 Matrix Matrix::operator+=(const Matrix& rhs) {
     if(isValid() && rhs.isValid() &&
@@ -95,6 +95,15 @@ Matrix Matrix::operator+=(const Matrix& rhs) {
 }
 
 Matrix Matrix::operator+(const Matrix& rhs) {
+    //vitass foreslår:
+    /*
+    //siden (lhs + rhs) = et helt annet objekt, som ikke
+    //skal påvirke (lhs) || (rhs), så..
+    Matrix m(*this);    //lag kopi av lhs
+    m += rhs;           //antar += er overloaded
+    return m;           //returner kopien
+    //fordel: bygger på forrige overload, reduserer kodeduplisering.
+    */
     Matrix eh = *this;
     
     if(isValid() && rhs.isValid() &&
