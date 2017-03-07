@@ -12,6 +12,7 @@ using std::string;
 //ingen output foreløpig
 //kjempegod ide å teste sånn.
 
+//eksisterer allerede i 2.cpp
 char sma_bokstaver(char bokstav);
 
 void ordstatistikk() {
