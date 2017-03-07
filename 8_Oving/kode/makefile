@@ -3,7 +3,7 @@ CFLAGS=-c -Wall -std=c++11
 #LDFLAGS=-lsfml-graphics -lsfml-window -lsfml-system
 LDFLAGS=
 
-SOURCES=main.cpp o7_1.cpp o7_2.cpp o7_3.cpp o7_4.cpp
+SOURCES=main.cpp 1.cpp 2.cpp 3.cpp 4.cpp
 
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=oving.out
