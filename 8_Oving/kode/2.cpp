@@ -21,7 +21,7 @@ void tegnstatistikk() {
                       'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
                       's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
     
-    string filnavn("Part3_w.txt");
+    string filnavn("test.txt");
     std::fstream inn_fil;
     inn_fil.open(filnavn);
 

@@ -31,7 +31,7 @@ int ord_til_fil() {
 }
 
 int lag_fil_linjenummer() {
-    string filnavn("Part3_w.txt");
+    string filnavn("test.txt");
     std::fstream inn_fil;
     ofstream ut_fil;
     inn_fil.open(filnavn);

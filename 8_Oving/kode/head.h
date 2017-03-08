@@ -6,7 +6,7 @@ int lag_fil_linjenummer();
 
 //7_2
 char sma_bokstaver(char bokstav);
-void tegnsstatistikk();
+void tegnstatistikk();
 
 //7 - 3
 
