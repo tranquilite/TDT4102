@@ -8,6 +8,8 @@ class CourseCatalog {
     private:
         std::map<std::string, std::string> emner;
 
+        int CSVOutput(std::ostream&) const;
+
     public:
         void addCourse(std::string, std::string);
         void updateCourse(std::string, std::string);
@@ -15,7 +17,6 @@ class CourseCatalog {
 
         int writeCatalogToFile(std::string fileName) const;
         int readFileToCatalog(std::string fileName);
-        int CSVOutput(std::ostream&) const;
 
         void testClearCatalogue();
         //Til forbedring: operator<< skal være i åpent namespace, men det er
