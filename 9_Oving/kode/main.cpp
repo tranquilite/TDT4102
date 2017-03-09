@@ -4,7 +4,7 @@
 #include <ctime>
 #include <iostream>
 
-#include "Minesweeper.h"
+#include "minesweeper.h"
 
 using namespace std;
 
