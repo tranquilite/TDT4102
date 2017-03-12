@@ -1,10 +1,21 @@
 #pragma once
+#include<iostream>
+
+
+struct Tile {
+    //en rute er alltid lukket og ~mine, mm. annet er sagt.
+    bool open = false;
+    bool mine = false;
+};
 
 class Minesweeper {
 private:
     // Legg til de medlemsvariablene og hjelpefunksjonene du trenger
+    int rader, kolonner, miner;
+    Tile** tileset = nullptr;
 
 public:
+    //              kolonner     rader    miner
     Minesweeper(int width, int height, int mines);
     ~Minesweeper();
 
@@ -21,3 +32,8 @@ public:
     Minesweeper(const Minesweeper &) = delete;
     Minesweeper &operator=(const Minesweeper &) = delete;
 };
+
+/*const std::ostream& operator<<(std::ostream& stream, const Tile& T_) {
+    stream << T_.open;
+    return stream;
+}*/

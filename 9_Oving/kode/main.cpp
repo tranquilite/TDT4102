@@ -35,9 +35,10 @@ int main() {
     }
 
 
-    cout << "Skriv inn høyde, bredde og antall miner: ";
-    int height = 20, width = 30, mines = 40;
-    cin >> height >> width >> mines;
+    //cout << "Skriv inn høyde, bredde og antall miner: ";
+    //int height = 20, width = 30, mines = 40;
+    //cin >> height >> width >> mines;
+    int height=5, width=5, mines=10;
 
     Minesweeper* game = new Minesweeper(width, height, mines);
 
