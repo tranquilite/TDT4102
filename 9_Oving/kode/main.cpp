@@ -63,8 +63,12 @@ int main() {
                     window.close();
                     break;
                 case sf::Keyboard::Space:
+                    std::cout << "\tKaller reset" << std::endl;
                     delete game;
                     game = new Minesweeper(width, height, mines);
+                    break;
+                case sf::Keyboard::D:
+                    game->modeDebug();
                     break;
                 }
                 break;

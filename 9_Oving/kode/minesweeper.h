@@ -4,8 +4,9 @@
 
 struct Tile {
     //en rute er alltid lukket og ~mine, mm. annet er sagt.
-    bool open = false;
-    bool mine = false;
+    bool open   =   false;
+    bool mine   =   false;
+    bool flagged =  false;
 };
 
 class Minesweeper {
@@ -13,6 +14,9 @@ private:
     // Legg til de medlemsvariablene og hjelpefunksjonene du trenger
     int rader, kolonner, miner;
     Tile** tileset = nullptr;
+    bool gameOver;
+
+    void populateTilesetWithMines();
 
 public:
     //              kolonner     rader    miner
@@ -25,8 +29,9 @@ public:
     bool isTileMine(int row, int col) const;
 
     void openTile(int row, int col);
-
     int numAdjacentMines(int row, int col) const;
+
+    void modeDebug();
 
     // Vi slår av autogenerert kopikonstruktør og tilordningsoperator for å unngå feil
     Minesweeper(const Minesweeper &) = delete;
