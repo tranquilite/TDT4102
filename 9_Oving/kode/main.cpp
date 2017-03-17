@@ -25,6 +25,7 @@ const sf::Color mine_color = sf::Color::Red;
 const int tile_size = 32;
 const int border_size = 2;
 
+
 int main() {
     srand(time(nullptr));
 
@@ -42,7 +43,7 @@ int main() {
 
     Minesweeper* game = new Minesweeper(width, height, mines);
 
-    sf::RenderWindow window(sf::VideoMode(width * tile_size, height * tile_size), "Minesweeper", sf::Style::Close);
+    sf::RenderWindow window(sf::VideoMode(width * tile_size + 40, height * tile_size), "Minesweeper", sf::Style::Close);
 
     cout << "Velkommen til Minesveiper!" << endl;
     cout << "Klikk en rute for å åpne den. Trykk ESC eller Q for å avslutte, eller MELLOMROM for å starte på nytt" << endl;
@@ -65,6 +66,9 @@ int main() {
                 case sf::Keyboard::Space:
                     delete game;
                     game = new Minesweeper(width, height, mines);
+                    break;
+                case sf::Keyboard::D:
+                    game->modeDebug();
                     break;
                 }
                 break;
@@ -97,6 +101,7 @@ int main() {
 
                 window.draw(tile);
 
+
                 if (game->isTileOpen(row, col) || (game->isGameOver() && game->isTileMine(row, col))) {
                     sf::Text text;
                     text.setStyle(sf::Text::Bold);
@@ -123,6 +128,14 @@ int main() {
                     window.draw(text);
                 }
             }
+        }
+
+        for(int bar=0; bar < (height*width); ++bar) {
+                sf::RectangleShape HPCounter;
+                HPCounter.setSize(sf::Vector2f(40, 10));
+                HPCounter.setPosition(tile_size*width, bar*10);
+                HPCounter.setFillColor(sf::Color::Blue);
+                window.draw(HPCounter);
         }
 
         window.display();
