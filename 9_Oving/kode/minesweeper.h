@@ -4,19 +4,21 @@
 
 struct Tile {
     //en rute er alltid lukket og ~mine, mm. annet er sagt.
-    bool open   =   false;
-    bool mine   =   false;
-    bool flagged =  false;
+    bool open       =   false;
+    bool mine       =   false;
+    bool flagged    =   false;
+    int numAdjMines =   0;
 };
 
 class Minesweeper {
 private:
     // Legg til de medlemsvariablene og hjelpefunksjonene du trenger
-    int rader, kolonner, miner;
+    int rader, kolonner, miner, aapne = 0;
     Tile** tileset = nullptr;
     bool gameOver;
 
     void populateTilesetWithMines();
+    void buildAdjacencyIndex(int row, int col);
 
 public:
     //              kolonner     rader    miner
