@@ -74,14 +74,19 @@ int main() {
                 }
                 break;
             case sf::Event::MouseButtonPressed:
-                if (event.mouseButton.button == sf::Mouse::Left && !game->isGameOver()) {
-                    int row = event.mouseButton.y / tile_size;
-                    int col = event.mouseButton.x / tile_size;
+                int row = event.mouseButton.y / tile_size;
+                int col = event.mouseButton.x / tile_size;
 
-                    game->openTile(row, col);
+                if ( (row < game->getRad()) && (col < game->getKol()) && !game->isGameOver() ) {
+                    if ( event.mouseButton.button == sf::Mouse::Left ) {
+                        game->openTile(row, col);
 
-                    if (game->isGameOver()) {
-                        cout << "SPILLET ER OVER! Trykk ESC eller Q for å avslutte, eller MELLOMROM for å starte på nytt" << endl;
+                        if (game->isGameOver()) {
+                            cout << "SPILLET ER OVER! Trykk ESC eller Q for å avslutte, eller MELLOMROM for å starte på nytt" << endl;
+                        }
+
+                    } else if ( event.mouseButton.button == sf::Mouse::Right ) {
+                        game->flagTile(row, col);
                     }
                 }
                 break;
@@ -102,22 +107,27 @@ int main() {
 
                 window.draw(tile);
 
+                sf::Text text;
+                text.setStyle(sf::Text::Bold);
+                text.setCharacterSize(tile_size / 2.0);
 
-                if (game->isTileOpen(row, col) || (game->isGameOver() && game->isTileMine(row, col))) {
-                    sf::Text text;
-                    text.setStyle(sf::Text::Bold);
-                    text.setCharacterSize(tile_size / 2.0);
+                    if (game->isTileFlagged(row, col) && !game->isTileOpen(row, col)) { //GODDAMNIT. I feil løkke
+                        text.setString("F");
+                        text.setFillColor(sf::Color::Red);
 
-                    if (game->isTileMine(row, col)) {
-                        text.setString("X");
-                        text.setFillColor(mine_color);
-                    }
-                    else {
-                        int num_adjacent_mines = game->numAdjacentMines(row, col);
-                        //if(num_adjacent_mines == 0) continue; // Ikke tegn nuller
-                        text.setString(to_string(num_adjacent_mines));
-                        text.setFillColor(number_colors[num_adjacent_mines]);
-                    }
+                    } else if (game->isTileOpen(row, col)) {
+
+                        if (game->isTileMine(row, col)) {
+                            text.setString("X");
+                            text.setFillColor(mine_color);
+                        }
+                        else {
+                            int num_adjacent_mines = game->numAdjacentMines(row, col);
+                            if(num_adjacent_mines == 0) continue; // Ikke tegn nuller
+                            text.setString(to_string(num_adjacent_mines));
+                            //text.setFillColor(number_colors[num_adjacent_mines]);
+                            text.setFillColor(sf::Color::Black);
+                        }
 
                     text.setFont(font);
 
@@ -127,7 +137,8 @@ int main() {
                     text.setPosition(tile_x + tile_size / 2.0, tile_y + tile_size / 2.0);
 
                     window.draw(text);
-                }
+                    }
+               // }
             }
         }
 
