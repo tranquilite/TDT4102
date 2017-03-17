@@ -103,7 +103,8 @@ void Minesweeper::buildAdjacencyIndex(int row, int col) {
         }
     }
 
-    tileset[row][col].numAdjMines = e;
+    //std::cout << "Set adj " << col << ", " << row << " = " << e << std::endl;
+    tileset[col][row].numAdjMines = e;
 }
 
 void Minesweeper::modeDebug() {

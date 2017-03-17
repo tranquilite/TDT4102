@@ -10,7 +10,7 @@ using namespace std;
 
 const sf::Color open_fill_color = sf::Color::White, closed_fill_color(192, 192, 192);
 const sf::Color number_colors[9] = {
-    sf::Color::White,
+    sf::Color::Black,
     sf::Color::Blue,
     sf::Color(0, 128, 0),
     sf::Color::Red,
@@ -39,7 +39,7 @@ int main() {
     //cout << "Skriv inn høyde, bredde og antall miner: ";
     //int height = 20, width = 30, mines = 40;
     //cin >> height >> width >> mines;
-    int height=5, width=5, mines=10;
+    int height=5, width=5, mines=4;
 
     Minesweeper* game = new Minesweeper(width, height, mines);
 
@@ -65,6 +65,7 @@ int main() {
                     break;
                 case sf::Keyboard::Space:
                     delete game;
+                    //std::cout << std::endl;
                     game = new Minesweeper(width, height, mines);
                     break;
                 case sf::Keyboard::D:
@@ -113,7 +114,7 @@ int main() {
                     }
                     else {
                         int num_adjacent_mines = game->numAdjacentMines(row, col);
-                        if(num_adjacent_mines == 0) continue; // Ikke tegn nuller
+                        //if(num_adjacent_mines == 0) continue; // Ikke tegn nuller
                         text.setString(to_string(num_adjacent_mines));
                         text.setFillColor(number_colors[num_adjacent_mines]);
                     }
