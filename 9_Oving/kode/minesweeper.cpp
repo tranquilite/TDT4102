@@ -8,6 +8,7 @@ Minesweeper::Minesweeper(int width, int height, int mines) {
     rader       = height;
     kolonner    = width;
     miner       = mines;
+    aapne       = 0;
     gameOver    = false;
     tileset     = new Tile*[kolonner];
     //Dette er så uttrolig tiltak.

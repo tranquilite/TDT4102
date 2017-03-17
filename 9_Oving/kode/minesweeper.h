@@ -13,7 +13,7 @@ struct Tile {
 class Minesweeper {
 private:
     // Legg til de medlemsvariablene og hjelpefunksjonene du trenger
-    int rader, kolonner, miner, aapne = 0;
+    int rader, kolonner, miner, aapne;
     Tile** tileset = nullptr;
     bool gameOver;
 
