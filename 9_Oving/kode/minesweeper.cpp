@@ -1,6 +1,6 @@
 #include<iostream>
 
-#include "minesweeper.h"
+#include"minesweeper.h"
 
 bool __debug = false;
 
@@ -24,20 +24,20 @@ Minesweeper::Minesweeper(int width, int height, int mines) {
             buildAdjacencyIndex(r, k);
         }
     }
+
     if(__debug == true) {
-        for(int e = 0; e < rader; ++e) {
-            for(int i=0; i<kolonner; ++i) {
-                tileset[i][e].open = true;
-            }
-        }
+        clearTileCover();
     }
 }
 
 Minesweeper::~Minesweeper() {
-    delete tileset; //Mop-up
+    delete tileset;
 }
 
-bool Minesweeper::isGameOver() const { return gameOver; }
+bool Minesweeper::isGameOver() const {
+    if(gameOver == true) { clearTileCover(); }
+    return gameOver;
+}
 
 bool Minesweeper::isTileOpen(int row, int col) const {
     return tileset[col][row].open;
@@ -45,15 +45,22 @@ bool Minesweeper::isTileOpen(int row, int col) const {
 
 bool Minesweeper::isTileMine(int row, int col) const {
     return tileset[col][row].mine;
-    return false;
+}
+
+bool Minesweeper::isTileFlagged(int row, int col) const {
+    return tileset[col][row].flag;
 }
 
 void Minesweeper::openTile(int row, int col) {
-    if(tileset[col][row].mine == true) {
-        gameOver = true;
-    }
-    ++aapne;
-    tileset[col][row].open = true;
+    gameOver = tileset[col][row].mine?true:false;
+    tileset[col][row].open = tileset[col][row].flag?false:true;
+    aapne += tileset[col][row].open;
+    if(__debug == true) { dumpTile(row, col); }
+}
+
+void Minesweeper::flagTile(int row, int col) {
+    tileset[col][row].flag = tileset[col][row].flag?false:true;
+    if(__debug == true) { dumpTile(row, col); }
 }
 
 int Minesweeper::numAdjacentMines(int row, int col) const {
@@ -90,34 +97,42 @@ void Minesweeper::populateTilesetWithMines() {
 
 void Minesweeper::buildAdjacencyIndex(int row, int col) {
     //Gyldige offsets. Med klokka fra midnatt.
-    int _kol[8] = { 0,  1, 1, 1, 0, -1, -1, -1};
-    int _rad[8] = {-1, -1, 0, 1, 1,  1,  0, -1};
-    int e = 0;
+    const int _kol[8] = { 0,  1, 1, 1, 0, -1, -1, -1};
+    const int _rad[8] = {-1, -1, 0, 1, 1,  1,  0, -1};
+    int counter = 0;
     for(int i=0; i < 8; ++i) {
-        int x1 = (col+_kol[i]);// x2 = (col-_kol[i]);
-        int y1 = (row+_rad[i]);// y2 = (row-_rad[i]);
+        int x1 = (col+_kol[i]);
+        int y1 = (row+_rad[i]);
         if( (y1 >= 0) && (y1 < rader) &&
             (x1 >= 0) && (x1 < kolonner) ) {
-            e += isTileMine((row+_rad[i]),(col+_kol[i]));
-            //                  0           5
+            counter += isTileMine((row+_rad[i]),(col+_kol[i]));
         }
     }
 
-    //std::cout << "Set adj " << col << ", " << row << " = " << e << std::endl;
-    tileset[col][row].numAdjMines = e;
+    tileset[col][row].numAdjMines = counter;
+}
+
+void Minesweeper::clearTileCover() const {
+    for(int e = 0; e < rader; ++e) {
+           for(int i=0; i<kolonner; ++i) {
+             tileset[i][e].open = true;
+        }
+    }
+}
+
+int Minesweeper::getRad() const { return rader; }
+int Minesweeper::getKol() const { return kolonner; }
+
+//=====================Crap til å hjelpe med debugging
+void Minesweeper::dumpTile(int row, int col) const {
+    Tile e = tileset[col][row];
+    std::cout   << "(" << col << ", " << row << ") "
+                << "Open: "<< e.open << ", "
+                << "Mine: "<< e.mine << ", "
+                << "Flag: "<< e.flag << std::endl;
 }
 
 void Minesweeper::modeDebug() {
-    //flip the switch
-    if(__debug == false) {
-        __debug = true;
-    } else {
-        __debug = false;
-    }
-
-    for(int e = 0; e < rader; ++e) {
-        for(int i=0; i<kolonner; ++i) {
-            tileset[i][e].open = true;
-        }
-    }
+    __debug = __debug?false:true;
+    clearTileCover();
 }
