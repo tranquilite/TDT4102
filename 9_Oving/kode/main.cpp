@@ -4,7 +4,8 @@
 #include <ctime>
 #include <iostream>
 
-#include "minesweeper.h"
+#include"minesweeper.h"
+#include"hpcounter.h"
 
 using namespace std;
 
@@ -39,9 +40,10 @@ int main() {
     //cout << "Skriv inn høyde, bredde og antall miner: ";
     //int height = 20, width = 30, mines = 40;
     //cin >> height >> width >> mines;
-    int height=5, width=5, mines=4;
+    int height=5, width=12, mines=10;
 
-    Minesweeper* game = new Minesweeper(width, height, mines);
+    Minesweeper* game   = new Minesweeper(width, height, mines);
+    HPCounter* hp       = new HPCounter(game);
 
     sf::RenderWindow window(sf::VideoMode(width * tile_size + 40, height * tile_size), "Minesweeper", sf::Style::Close);
 
@@ -65,8 +67,9 @@ int main() {
                     break;
                 case sf::Keyboard::Space:
                     delete game;
-                    //std::cout << std::endl;
-                    game = new Minesweeper(width, height, mines);
+                    delete hp;
+                    game    = new Minesweeper(width, height, mines);
+                    hp      = new HPCounter(game);
                     break;
                 case sf::Keyboard::D:
                     game->modeDebug();
@@ -74,14 +77,18 @@ int main() {
                 }
                 break;
             case sf::Event::MouseButtonPressed:
-                if (event.mouseButton.button == sf::Mouse::Left && !game->isGameOver()) {
-                    int row = event.mouseButton.y / tile_size;
-                    int col = event.mouseButton.x / tile_size;
+                int row = event.mouseButton.y / tile_size;
+                int col = event.mouseButton.x / tile_size;
+                if ( (row < game->getRad()) && (col < game->getKol()) && !game->isGameOver() ) {
+                    if ( event.mouseButton.button == sf::Mouse::Left ) {
+                        game->openTile(row, col);
 
-                    game->openTile(row, col);
+                        if (game->isGameOver()) {
+                            cout << "SPILLET ER OVER! Trykk ESC eller Q for å avslutte, eller MELLOMROM for å starte på nytt" << endl;
+                        }
 
-                    if (game->isGameOver()) {
-                        cout << "SPILLET ER OVER! Trykk ESC eller Q for å avslutte, eller MELLOMROM for å starte på nytt" << endl;
+                    } else if ( event.mouseButton.button == sf::Mouse::Right ) {
+                        game->flagTile(row, col);
                     }
                 }
                 break;
@@ -102,38 +109,43 @@ int main() {
 
                 window.draw(tile);
 
+                sf::Text text;
+                text.setStyle(sf::Text::Bold);
+                text.setCharacterSize(tile_size / 2.0);
 
-                if (game->isTileOpen(row, col) || (game->isGameOver() && game->isTileMine(row, col))) {
-                    sf::Text text;
-                    text.setStyle(sf::Text::Bold);
-                    text.setCharacterSize(tile_size / 2.0);
+                    if (game->isTileFlagged(row, col) && !game->isTileOpen(row, col)) { //GODDAMNIT. I feil løkke
+                        text.setString("F");
+                        text.setFillColor(sf::Color::Red);
 
-                    if (game->isTileMine(row, col)) {
-                        text.setString("X");
-                        text.setFillColor(mine_color);
+                    } else if (game->isTileOpen(row, col)) {
+
+                        if (game->isTileMine(row, col)) {
+                            text.setString("X");
+                            text.setFillColor(mine_color);
+                        }
+                        else {
+                            int num_adjacent_mines = game->numAdjacentMines(row, col);
+                            if(num_adjacent_mines == 0) continue; // Ikke tegn nuller
+                            text.setString(to_string(num_adjacent_mines));
+                            text.setFillColor(number_colors[num_adjacent_mines]);
+                        }
+
                     }
-                    else {
-                        int num_adjacent_mines = game->numAdjacentMines(row, col);
-                        //if(num_adjacent_mines == 0) continue; // Ikke tegn nuller
-                        text.setString(to_string(num_adjacent_mines));
-                        text.setFillColor(number_colors[num_adjacent_mines]);
-                    }
 
-                    text.setFont(font);
 
-                    sf::FloatRect text_rect = text.getLocalBounds();
-                    text.setOrigin(text_rect.left + text_rect.width  / 2.0,
-                                   text_rect.top  + text_rect.height / 2.0);
-                    text.setPosition(tile_x + tile_size / 2.0, tile_y + tile_size / 2.0);
+                text.setFont(font);
 
-                    window.draw(text);
-                }
+                sf::FloatRect text_rect = text.getLocalBounds();
+                text.setOrigin(text_rect.left + text_rect.width  / 2.0,
+                               text_rect.top  + text_rect.height / 2.0);
+                text.setPosition(tile_x + tile_size / 2.0, tile_y + tile_size / 2.0);
+                window.draw(text);
             }
         }
 
         for(int bar=0; bar < (height*width); ++bar) {
                 sf::RectangleShape HPCounter;
-                HPCounter.setSize(sf::Vector2f(40, 10));
+                HPCounter.setSize(sf::Vector2f(40, ((height*width)/height)));
                 HPCounter.setPosition(tile_size*width, bar*10);
                 HPCounter.setFillColor(sf::Color::Blue);
                 window.draw(HPCounter);
