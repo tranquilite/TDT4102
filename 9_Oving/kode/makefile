@@ -2,7 +2,7 @@ CC=g++
 CFLAGS=-c -Wall -std=c++11
 LDFLAGS=-lsfml-graphics -lsfml-window -lsfml-system -v
 
-SOURCES=main.cpp minesweeper.cpp
+SOURCES=main.cpp minesweeper.cpp hpcounter.cpp
 
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=oving.out
